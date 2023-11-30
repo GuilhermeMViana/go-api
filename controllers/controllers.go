@@ -3,12 +3,11 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/GuilhermeMViana/go-rest-api/database"
-	"github.com/gorilla/mux"
 	"net/http"
-	"strconv"
 
+	"github.com/GuilhermeMViana/go-rest-api/database"
 	"github.com/GuilhermeMViana/go-rest-api/models"
+	"github.com/gorilla/mux"
 )
 
 func Home(w http.ResponseWriter, r *http.Request) {
@@ -23,11 +22,9 @@ func AllPersons(w http.ResponseWriter, r *http.Request) {
 
 func IdFilter(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	Id := vars["Id"]
+	id := vars["id"]
 
-	for _, person := range models.Persons {
-		if strconv.Itoa(person.Id) == Id {
-			json.NewEncoder(w).Encode(person)
-		}
-	}
+	var personalidade models.Person
+	database.DB.First(&personalidade, id)
+	json.NewEncoder(w).Encode(personalidade)
 }

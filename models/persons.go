@@ -4,9 +4,9 @@ import "gorm.io/gorm"
 
 type Person struct {
 	gorm.Model
-	Id       int    `json:"Id"`
-	Nome     string `json:"Nome"`
-	Historia string `json:"História"`
+	Id       int    `json:"id"`
+	Nome     string `json:"nome"`
+	Historia string `json:"história" gorm:"tableName:persons"`
 }
 
 var Persons []Person
