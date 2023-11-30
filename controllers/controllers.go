@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/GuilhermeMViana/go-rest-api/database"
 	"github.com/gorilla/mux"
 	"net/http"
 	"strconv"
@@ -15,7 +16,9 @@ func Home(w http.ResponseWriter, r *http.Request) {
 }
 
 func AllPersons(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(models.Persons)
+	var p []models.Person
+	database.DB.Find(&p)
+	json.NewEncoder(w).Encode(p)
 }
 
 func IdFilter(w http.ResponseWriter, r *http.Request) {

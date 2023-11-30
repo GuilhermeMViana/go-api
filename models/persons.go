@@ -1,9 +1,12 @@
 package models
 
+import "gorm.io/gorm"
+
 type Person struct {
-	Id      int    `json:"Id"`
-	Name    string `json:"Nome"`
-	History string `json:"História"`
+	gorm.Model
+	Id       int    `json:"Id"`
+	Nome     string `json:"Nome"`
+	Historia string `json:"História"`
 }
 
 var Persons []Person
